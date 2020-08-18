@@ -2,8 +2,7 @@ import React from 'react';
 
 export const Container = ({ className, children, ...props }) => {
   let classArray = [
-      "px-16",
-      "py-8",
+      "container",
       className
   ]
 
