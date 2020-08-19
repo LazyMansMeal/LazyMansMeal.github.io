@@ -17179,7 +17179,7 @@ h1 {
 
 h2 {
   font-size: 1.875rem;
-  font-weight: 700
+  font-weight: 600
 }
 
 h3 {
@@ -17199,6 +17199,12 @@ h5 {
 
 h6 {
   font-weight: 600
+}
+
+body {
+  --bg-opacity: 1;
+  background-color: #edf2f7;
+  background-color: rgba(237, 242, 247, var(--bg-opacity))
 }
 
 @media (min-width: 640px) {
