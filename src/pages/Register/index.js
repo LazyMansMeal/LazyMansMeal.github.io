@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container, Card, TextInput, Button } from '../../components';
 
-class Login extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      fullName: "",
       username: "",
       password: ""
     }
@@ -18,15 +19,22 @@ class Login extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state.username, this.state.password);
+    console.log(this.state);
   }
 
   render() {
     return (
       <Container className="max-w-full h-screen flex items-center p-2">
         <Card className="w-full max-w-sm mx-auto flex flex-col p-4 mb-16">
-          <h2 className="font-semibold mb-4">Login</h2>
+          <h2 className="mb-4">Register</h2>
           <form className="flex flex-col" onSubmit={this.onSubmit}>
+            <label>Full Name</label>
+            <TextInput
+              className="w-full"
+              name="fullName"
+              value={this.state.fullName}
+              onChange={this.handleInputs}
+            />
             <label>Username</label>
             <TextInput
               className="w-full"
@@ -42,12 +50,10 @@ class Login extends React.Component {
               value={this.state.password}
               onChange={this.handleInputs}
             />
-            <Button className="w-full my-2" type="sumbit" color="primary">
-              Login
-            </Button>
+            <Button className="w-full my-2" type="sumbit" color="primary">Register</Button>
           </form>
           <div className="text-gray-500">
-            Don't have an account? <a className="text-secondary-500" href="/#/register">Create an account</a>
+            Already have an account? <a className="text-secondary-500" href="/#/login">Sign in</a>
           </div>
         </Card>
       </Container>
@@ -55,4 +61,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default Register;
