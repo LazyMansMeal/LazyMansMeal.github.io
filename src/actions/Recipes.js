@@ -3,13 +3,13 @@ function sleep(ms) {
 }
 
 export const RECIPES_REQUEST = 'RECIPES_REQUEST';
-export function recipesRequest() {
+function recipesRequest() {
   return {
     type: RECIPES_REQUEST
   }
 }
 export const RECIPES_RESULT = 'RECIPES_RESULT';
-export function recipesResult(recipes) {
+function recipesResult(recipes) {
   return {
     type: RECIPES_RESULT,
     recipes
@@ -17,6 +17,7 @@ export function recipesResult(recipes) {
 }
 export function fetchRecipes() {
   return async (dispatch, getState) => {
+    dispatch(recipesRequest())
     await sleep(2000);
     const recipes = require('../assets/recipes.test.json');
     dispatch(recipesResult(recipes));

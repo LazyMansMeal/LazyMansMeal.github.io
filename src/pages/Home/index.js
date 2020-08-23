@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, RecipeList } from '../../components';
+import { Container, RecipeList, Modal } from '../../components';
 import { fetchRecipes } from '../../actions';
 
 class Home extends React.Component {
@@ -9,7 +9,7 @@ class Home extends React.Component {
   }
   render() {
     return (
-      <Container className="container mx-8 px-8 my-4 py-4">
+      <Container className="container px-8 py-4 mx-8 my-4">
         <h1>Home Page</h1>
         {this.props.isLoading && <div>Loading...</div>}
         {this.props.isLoading === false && <RecipeList recipes={this.props.recipes} />}

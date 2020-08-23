@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { register } from '../../actions';
 import { Container, Card, TextInput, Button } from '../../components';
 
 class Register extends React.Component {
@@ -19,13 +21,14 @@ class Register extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    const { username, password, fullName } = this.state;
+    this.props.register(username, password, fullName);
   }
 
   render() {
     return (
-      <Container className="max-w-full h-screen flex items-center p-2">
-        <Card className="w-full max-w-sm mx-auto flex flex-col p-4 mb-16">
+      <Container className="flex items-center h-screen max-w-full p-2">
+        <Card className="flex flex-col w-full max-w-sm p-4 mx-auto mb-16">
           <h2 className="mb-4">Register</h2>
           <form className="flex flex-col" onSubmit={this.onSubmit}>
             <label>Full Name</label>
@@ -61,4 +64,16 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+const mapStateToProps = (state) => {
+  return {
+    redirectTo: state.auth.redirectTo
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    register: (username, password, fullName) => dispatch(register(username, password, fullName))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Container, Card, TextInput, Button } from '../../components';
+import { login } from '../../actions';
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -18,14 +21,17 @@ class Login extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state.username, this.state.password);
+    this.props.login(this.state.username, this.state.password);
   }
 
   render() {
+    if (this.props.redirectTo) {
+      return <Redirect to={this.props.redirectTo} />
+    }
     return (
-      <Container className="max-w-full h-screen flex items-center p-2">
-        <Card className="w-full max-w-sm mx-auto flex flex-col p-4 mb-16">
-          <h2 className="font-semibold mb-4">Login</h2>
+      <Container className="flex items-center h-screen max-w-full p-2">
+        <Card className="flex flex-col w-full max-w-sm p-4 mx-auto mb-16">
+          <h2 className="mb-4 font-semibold">Login</h2>
           <form className="flex flex-col" onSubmit={this.onSubmit}>
             <label>Username</label>
             <TextInput
@@ -55,4 +61,16 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    redirectTo: state.auth.redirectTo
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (username, password) => dispatch(login(username, password))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

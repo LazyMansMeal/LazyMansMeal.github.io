@@ -2,7 +2,8 @@ import React from 'react';
 
 export const NavbarLogo = ({ children, className, ...props }) => {
   let classArray = [
-    "flex",
+    "hidden",
+    "md:flex",
     "items-center",
     "flex-shrink-0",
     "mr-6",
@@ -70,9 +71,12 @@ export const NavbarItem = ({children, className, href, ...props}) => {
 export const MenuButton = ({children, className, onClick, ...props}) => {
   let classArray = [
     "flex",
+    "flex-none",
     "items-center",
-    "px-3",
-    "py-2",
+    "px-2",
+    "py-1",
+    "h-8",
+    "w-8",
     "text-primary-200",
     "border",
     "border-teal-400",
@@ -120,14 +124,18 @@ export class Navbar extends React.Component {
   render() {
     return (
       <nav className={this.baseClass}>
-        <div className="hidden lg:flex w-full">
+        <div className="hidden w-full lg:flex">
           {this.props.children}
         </div>
-        <div className="block lg:hidden">
-          {this.state.showMenu && this.props.children}
-          <MenuButton onClick={() => this.setState({ showMenu: !this.state.showMenu })}>
-            <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-          </MenuButton>
+        <div className="flex items-center justify-between w-full lg:hidden">
+          {this.state.showMenu && <div className="flex-1">
+            {this.props.children}
+          </div>}
+          <div className={`block ${this.state.showMenu ? "" : "w-full"}`}>
+            <MenuButton onClick={() => this.setState({ showMenu: !this.state.showMenu })}>
+              <svg className="fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+            </MenuButton>
+          </div>
         </div>
       </nav>
     );
