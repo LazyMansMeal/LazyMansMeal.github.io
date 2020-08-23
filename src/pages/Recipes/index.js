@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, RecipeList } from '../../components';
+import { Container, MyRecipeList } from '../../components';
 import { fetchRecipes } from '../../actions';
-class Home extends React.Component {
+
+class Recipes extends React.Component {
   componentDidMount() {
     this.props.fetchRecipes();
   }
   render() {
     return (
       <Container className="container px-8 py-4 mx-8 my-4">
-        <h1>Home Page</h1>
+        <h1>My Recipes</h1>
         {this.props.isLoading && <div>Loading...</div>}
-        {this.props.isLoading === false && <RecipeList recipes={this.props.recipes} />}
+        {this.props.isLoading === false && <MyRecipeList recipes={this.props.recipes} />}
       </Container>
     );
   }
@@ -29,4 +30,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Recipes);

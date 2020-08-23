@@ -15,6 +15,9 @@ const Appbar = (props) => {
       <Navbar.Item href="/">
         Home
       </Navbar.Item>
+      <Navbar.Item href="/#/recipes">
+        My Recipes
+      </Navbar.Item>
       <Navbar.Item className="lg:float-right">
         <Dropdown>
           <Dropdown.Button>

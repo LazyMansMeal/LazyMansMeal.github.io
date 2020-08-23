@@ -1,6 +1,4 @@
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+import ServiceClient from '../api/ServiceClient';
 
 export const RECIPES_REQUEST = 'RECIPES_REQUEST';
 function recipesRequest() {
@@ -17,9 +15,10 @@ function recipesResult(recipes) {
 }
 export function fetchRecipes() {
   return async (dispatch, getState) => {
-    dispatch(recipesRequest())
-    await sleep(2000);
-    const recipes = require('../assets/recipes.test.json');
+    const { accessToken, refreshToken } = getState().auth;
+    const serviceClient = new ServiceClient({accessToken, refreshToken});
+    dispatch(recipesRequest());
+    const recipes = await serviceClient.getRecipes();
     dispatch(recipesResult(recipes));
   }
 }
